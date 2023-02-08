@@ -23,7 +23,8 @@ public class RestaurantService {
         RestaurantModel resultantRestaurant = null;
         for(int i=0; i<list.size(); i++){
             RestaurantModel restaurant = list.get(i);
-            if(restaurant.getName().equals(name)) resultantRestaurant=restaurant;
+            if(restaurant.getName().equals(name))
+                resultantRestaurant=restaurant;
         }
         return resultantRestaurant;
     }
