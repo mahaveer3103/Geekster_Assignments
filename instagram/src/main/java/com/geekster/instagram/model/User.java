@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Tables;
+
 
 @Entity
 @Table(name = "tbl_user")
@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
     @Column(name = "first_name")
@@ -32,6 +32,5 @@ public class User {
 
     @Column(name = "email_id")
     private String emailId;
-
 
 }
