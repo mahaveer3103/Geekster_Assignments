@@ -1,7 +1,5 @@
 package com.geekster.instagram.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +15,7 @@ public class Post {
 
     @Id
     @Column(name = "post_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer postId;
     @Column(name = "created_date")
     private Timestamp createdDate;
@@ -25,8 +23,8 @@ public class Post {
     private Timestamp updateDate;
     @Column(name = "post_data")
     private String postData;
-    @JsonIgnore
     @JoinColumn(name = "user_id")
-    @ManyToOne  //Many Post for One User
+    @ManyToOne(fetch = FetchType.LAZY)  //Many Post for One User
     private User user;
+
 }

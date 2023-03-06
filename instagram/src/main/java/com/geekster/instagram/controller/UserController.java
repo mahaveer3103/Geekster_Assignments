@@ -25,10 +25,18 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity getUser(@Nullable @RequestParam Integer userId){
+    public ResponseEntity<List<User>> getUser(@Nullable @RequestParam Integer userId){
         List<User> userList = userService.getUser(userId);
-        return new ResponseEntity(userList,HttpStatus.OK);
+        return new ResponseEntity<>(userList,HttpStatus.OK);
     }
+
+    @PutMapping("/user/{userId}")
+    public ResponseEntity<String> updateUser(@PathVariable Integer userId, @RequestBody String userRequest){
+        User user = setUser(userRequest);
+        userService.updateUser(user,userId);
+        return new ResponseEntity<>("User Updated Successfully",HttpStatus.OK);
+    }
+
 
     private User setUser(String userData) {
         JSONObject json = new JSONObject(userData);

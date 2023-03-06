@@ -21,11 +21,19 @@ public class UserService {
     public List<User> getUser(Integer userId) {
         List<User> userList = new ArrayList<>();
         if(null!=userId){
-            User user = userRepository.getById(userId);
+            User user = userRepository.findById(userId).get();
             userList.add(user);
         }else {
             userList = userRepository.findAll();
         }
         return userList;
+    }
+
+    public void updateUser(User newUser, Integer userId) {
+        if(userRepository.findById(userId).isPresent()){
+            User oldUser = userRepository.findById(userId).get();
+            newUser.setUserId(oldUser.getUserId());
+            userRepository.save(newUser);
+        }
     }
 }
