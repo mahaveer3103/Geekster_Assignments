@@ -22,14 +22,14 @@ public class TodoController {
      private TodoService todoService;
 
     //Constructor-Injection (Optional @Autowired)
-    public TodoController(TodoService todoService){
-        this.todoService = todoService;
-    }
+//    public TodoController(TodoService todoService){
+//        this.todoService = todoService;
+//    }
 
 //    @Autowired //It is mandatory to make object
-    public void setTodoService(TodoService todoService) {
-        this.todoService = todoService;
-    }
+//    public void setTodoService(TodoService todoService) {
+//        this.todoService = todoService;
+//    }
 
     @PostMapping("/add-todo")  //It is used to save the newTODO
     public void addTodo(@RequestBody Todo todo){
