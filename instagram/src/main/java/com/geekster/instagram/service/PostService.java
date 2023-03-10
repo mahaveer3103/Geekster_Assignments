@@ -21,8 +21,8 @@ public class PostService {
     @Autowired
     PostRepository postRepository;
 
-    public void savePost(Post post){
-        postRepository.save(post);
+    public int savePost(Post post){
+        return postRepository.save(post).getPostId();
     }
 
     public JSONArray getPost(String postId, String userId) {

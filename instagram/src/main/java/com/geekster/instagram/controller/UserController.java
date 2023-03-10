@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PutMapping("/user/{userId}")
-    public ResponseEntity<String> updateUser(@PathVariable Integer userId, @RequestBody String userRequest){
+        public ResponseEntity<String> updateUser(@PathVariable Integer userId, @RequestBody String userRequest){
         User user = setUser(userRequest);
         userService.updateUser(user,userId);
         return new ResponseEntity<>("User Updated Successfully",HttpStatus.OK);

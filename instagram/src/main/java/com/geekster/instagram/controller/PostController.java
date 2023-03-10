@@ -26,8 +26,8 @@ public class PostController {
     public ResponseEntity<String> savePost(@RequestBody String postRequest){
         String savePost = "savePost";
         Post post = setPost(postRequest,savePost);
-        postService.savePost(post);
-        return new ResponseEntity<>("post saved successfully with postId - " + post.getPostId(), HttpStatus.CREATED);
+        int postId = postService.savePost(post);
+        return new ResponseEntity<>("post saved successfully with postId - " + postId, HttpStatus.CREATED);
     }
 
     @GetMapping("/post")
@@ -44,7 +44,7 @@ public class PostController {
     }
 
 
-    private Post setPost(String postRequest,String TypePost) {
+    private Post setPost(String postRequest,String PostType) {
         JSONObject json = new JSONObject(postRequest);
         User user = null;
         int userId = json.getInt("userId");
@@ -56,7 +56,7 @@ public class PostController {
         Post post = new Post();
         post.setPostData(json.getString("postData"));
         post.setUser(user);
-        if(TypePost.equals("savePost")) {
+        if(PostType.equals("savePost")) {
             Timestamp createdDate = new Timestamp(System.currentTimeMillis());
             post.setCreatedDate(createdDate);
         }

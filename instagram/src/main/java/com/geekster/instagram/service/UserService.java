@@ -31,8 +31,8 @@ public class UserService {
 
     public void updateUser(User newUser, Integer userId) {
         if(userRepository.findById(userId).isPresent()){
-            User oldUser = userRepository.findById(userId).get();
-            newUser.setUserId(oldUser.getUserId());
+//            User oldUser = userRepository.findById(userId).get();
+            newUser.setUserId(userId);
             userRepository.save(newUser);
         }
     }
