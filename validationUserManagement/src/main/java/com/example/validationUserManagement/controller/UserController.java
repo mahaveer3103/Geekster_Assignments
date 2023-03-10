@@ -46,6 +46,7 @@ public class UserController {
 
     @GetMapping("/getUser")
     public List<User> getUser(@Nullable @RequestParam String userId){
+
         return userService.getUser(userId);
     }
 
@@ -74,8 +75,12 @@ public class UserController {
         user.setDateOfBirth(json.getString("dateOfBirth"));
         user.setEmail(json.getString("email"));
         user.setPhoneNumber(json.getString("phoneNumber"));
-        user.setDate(json.getString("date"));
-        user.setTime(json.getString("time"));
+        if(json.has("date")) {
+            user.setDate(json.getString("date"));
+        }
+        if(json.has("time")){
+            user.setTime(json.getString("time"));
+        }
         return user;
     }
 
