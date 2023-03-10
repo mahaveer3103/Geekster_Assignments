@@ -1,5 +1,6 @@
 package com.project.ERP_Project.service;
 
+import com.project.ERP_Project.dto.StudentPercentageDTO;
 import com.project.ERP_Project.model.Student;
 import org.springframework.stereotype.Service;
 
@@ -41,11 +42,62 @@ public class ERPService {
         return null;
     }
 
-    public Student findTopper() {
+    public StudentPercentageDTO findTopper() {
+        List<StudentPercentageDTO> list = findAllPercentage();
+        double maxPercentage = Integer.MIN_VALUE;
+        StudentPercentageDTO marks = null;
+        for(StudentPercentageDTO percentageDTO:list){
+            if(percentageDTO.getPercentage()>maxPercentage){
+                maxPercentage = percentageDTO.getPercentage();
+                marks = percentageDTO;
+            }
+        }
+        return marks;
     }
 
-    public String findAllPercentage() {
+//    public List<String> findAllPercentage() {
+//        List<String> percentages = new ArrayList<>();
+//
+//        for(Student student:students){
+//            List<Double> marks = student.getMarks();
+//            double perc = 0.0;
+//            for(Double mark:marks){
+//                perc+=mark;
+//            }
+//            perc*=0.2;
+//            String res = student.getName()+" "+student.getRollNumber()+" "+perc;
+//            percentages.add(res);
+//        }
+//        return percentages;
+//    }
 
+    public List<StudentPercentageDTO> findAllPercentage(){
+        List<StudentPercentageDTO> percentages = new ArrayList<>();
+        for(Student student:students){
+            double percentage = 0.0;
+            List<Double> marks = student.getMarks();
+            for(Double mark:marks){
+                percentage+=mark;
+            }
+            percentage*=0.2;
+            StudentPercentageDTO studentPercentageDTO = new StudentPercentageDTO(student.getRollNumber(),student.getName(),percentage);
+            percentages.add(studentPercentageDTO);
+        }
+        return percentages;
+    }
+
+    public StudentPercentageDTO leastScorer() {
+        List<StudentPercentageDTO> list = findAllPercentage();
+        StudentPercentageDTO marks = null;
+        double per = Integer.MAX_VALUE;
+
+        for(StudentPercentageDTO student:list){
+            if(student.getPercentage()<per){
+                per = student.getPercentage();
+                marks = student;
+            }
+        }
+        return marks;
     }
 
 //    public void addStudent(Student student) {

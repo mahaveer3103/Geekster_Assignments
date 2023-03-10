@@ -1,5 +1,6 @@
 package com.project.ERP_Project.controller;
 
+import com.project.ERP_Project.dto.StudentPercentageDTO;
 import com.project.ERP_Project.model.Student;
 import com.project.ERP_Project.service.ERPService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +31,18 @@ public class ERPController {
 //    }
 
     @GetMapping("topper")
-    public Student findTopper(){
+    public StudentPercentageDTO findTopper(){
         return erpService.findTopper();
     }
 
     @GetMapping("find-percentage")
-    public String findPercentage(){
+    public List<StudentPercentageDTO> findPercentage(){
         return erpService.findAllPercentage();
     }
+
+    @GetMapping("least")
+    public StudentPercentageDTO findLeast(){
+        return erpService.leastScorer();
+    }
+
 }
